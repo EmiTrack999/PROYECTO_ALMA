@@ -1,0 +1,361 @@
+/* RESET Y CONFIGURACIÓN GLOBAL */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+  color: #fff;
+}
+
+/* VERIFICACIÓN DE EDAD */
+#verificacionEdad {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+#verificacionEdad h2 {
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.botonEdad {
+  padding: 12px 24px;
+  margin: 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.botonEdad.si {
+  background-color: #16a085;
+  color: white;
+}
+
+.botonEdad.no {
+  background-color: #c0392b;
+  color: white;
+}
+
+.botonEdad:hover {
+  transform: scale(1.05);
+}
+
+/* MODAL DE RESTRICCIÓN */
+#modalRestriccion {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.modalContenido {
+  background-color: #ffffff;
+  color: #111;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+  max-width: 400px;
+  width: 90%;
+}
+
+.modalContenido h3 {
+  margin-bottom: 12px;
+  font-size: 1.5rem;
+  color: #c0392b;
+}
+
+.modalContenido p {
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+.modalContenido button {
+  padding: 10px 20px;
+  background-color: #c0392b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.modalContenido button:hover {
+  background-color: #e74c3c;
+}
+
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 240px;
+  background: #1f1f2e;
+  color: #fff;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.sidebar-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+  text-align: center;
+  color: #00d1b2;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sidebar-nav a {
+  text-decoration: none;
+  color: #ccc;
+  font-size: 1rem;
+  padding: 12px 15px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  transition: background 0.3s, color 0.3s;
+}
+
+.sidebar-nav a i {
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+.sidebar-nav a:hover {
+  background-color: #00d1b2;
+  color: #1f1f2e;
+  font-weight: bold;
+}
+
+/* CONTENIDO PRINCIPAL */
+.main-content {
+  margin-left: 240px;
+  padding: 60px 40px;
+  flex: 1;
+  background-color: #f9fafc;
+  min-height: 100vh;
+  color: #333;
+}
+
+.menu-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background: white;
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+  text-align: center;
+}
+
+.menu-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 15px;
+}
+
+.menu-options {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.menu-btn {
+  padding: 14px 24px;
+  font-size: 1rem;
+  background: linear-gradient(90deg, #00c6a2, #00a98f);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  box-shadow: 0 4px 10px rgba(0, 198, 162, 0.25);
+  font-weight: 600;
+}
+
+.menu-btn:hover {
+  background: linear-gradient(90deg, #00a98f, #00c6a2);
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* CONTENIDO DE LA PÁGINA (FUERA DEL MODAL) */
+#contenidoPagina {
+  display: none;
+  padding: 40px;
+  text-align: center;
+}
+
+#contenidoPagina h1 {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+#contenidoPagina p {
+  font-size: 1.2rem;
+  color: #f0f0f0;
+}
+
+/* ESTILO PROFESIONAL PARA LISTAS DE BEBIDAS */
+.lista-bebidas {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+.lista-bebidas li {
+  background: rgba(0, 169, 143, 0.13);
+  color: #fff;
+  margin-bottom: 18px;
+  padding: 18px 18px 18px 24px;
+  border-radius: 12px;
+  font-size: 1.13rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  text-align: left;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+  border-left: 5px solid #00a98f;
+  position: relative;
+}
+.lista-bebidas li b {
+  color: #00ffd0;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.lista-bebidas li:hover {
+  background: #00a98f;
+  color: #fff;
+  transform: scale(1.03);
+}
+@media (max-width: 700px) {
+  .lista-bebidas li {
+    font-size: 1rem;
+    padding: 12px 10px 12px 14px;
+  }
+}
+
+/* RESPONSIVO */
+@media screen and (max-width: 768px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 15px 10px;
+  }
+
+  .sidebar-title {
+    display: none;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .menu-container {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .menu-title {
+    font-size: 1.5rem;
+  }
+
+  .menu-btn {
+    font-size: 0.95rem;
+  }
+
+  #verificacionEdad h2 {
+    font-size: 1.5rem;
+  }
+
+  .botonEdad {
+    width: 80%;
+  }
+
+  .modalContenido {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .logo-central {
+    width: 130px;
+  }
+
+  .frases-destacadas p {
+    font-size: 1rem;
+  }
+}
+
+/* --------------------------- */
+/* LOGO CENTRAL MÁS GRANDE Y PROFESIONAL */
+.logo-central {
+  width: 180px;
+  height: auto;
+  margin: 0 auto 30px auto;
+  display: block;
+  border-radius: 16px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.logo-central:hover {
+  transform: scale(1.05);
+}
+
+/* FRASES MOTIVADORAS */
+.frases-destacadas {
+  margin-bottom: 30px;
+  color: #444;
+}
+
+.frases-destacadas p {
+  font-size: 1.1rem;
+  font-style: italic;
+  margin: 10px 0;
+  color: #555;
+}

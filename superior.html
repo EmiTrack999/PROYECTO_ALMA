@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Superior - BebidasMX</title>
+  <link rel="stylesheet" href="ESTILOS.css" />
+  <style>
+    .cerveza-detalle { max-width: 600px; margin: 40px auto; background: rgba(255,255,255,0.10); border-radius: 18px; box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18); padding: 40px 32px 28px 32px; color: #fff; display: flex; flex-direction: column; align-items: center; animation: fadeIn 1s; }
+    .cerveza-detalle img { width: 220px; margin-bottom: 24px; border-radius: 12px; box-shadow: 0 4px 16px #0003; background: #fff; object-fit: contain; }
+    .cerveza-detalle h1 { color: #00a98f; font-size: 2rem; font-weight: 700; margin-bottom: 18px; text-align: center; letter-spacing: 1px; text-shadow: 0 2px 8px #0002; }
+    .cerveza-detalle p { font-size: 1.1rem; color: #e0e0e0; margin-bottom: 18px; text-align: center; }
+    .cerveza-detalle button { background: #00a98f; color: #fff; border: none; border-radius: 8px; padding: 10px 24px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-bottom: 18px; }
+    .cerveza-detalle button:hover { background: #00ffd0; color: #222; }
+    .cerveza-detalle a { color: #00ffd0; text-decoration: none; font-weight: 600; margin-top: 12px; display: inline-block; transition: color 0.2s; font-size: 1.1rem; }
+    .cerveza-detalle a:hover { color: #fff; text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="cerveza-detalle">
+    <img src="IMAGENES/superior.png" alt="Cerveza Superior" />
+    <h1>Superior</h1>
+    <p>Lager clara, de sabor suave y fácil de tomar.</p>
+    <button onclick="agregarAlCarrito('Superior')">Agregar al carrito</button>
+    <a href="bebidas_alcoholicas.html">Volver a bebidas alcohólicas</a>
+  </div>
+  <script>
+    function agregarAlCarrito(bebida) {
+      fetch('http://localhost:3000/api/carrito', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre: bebida })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if(data.mensaje) {
+          alert('Bebida agregada al carrito: ' + bebida);
+        } else {
+          alert(data.error || 'Error al agregar al carrito');
+        }
+      })
+      .catch(() => alert('Error de conexión con el servidor'));
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bebidas Energéticas Populares en México</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="main-content">
+        <h1>Bebidas Energéticas Populares</h1>
+        <p style="margin-bottom:24px; color:#00a98f; font-weight:600;">Las bebidas energéticas son consumidas por quienes buscan un impulso extra de energía y concentración. Son populares entre estudiantes, deportistas y personas con jornadas largas.</p>
+        <ul class="lista-bebidas">
+            <li><b>Red Bull</b>: Pionera en el mercado, famosa por su sabor y su eslogan "te da alas". <button onclick="agregarAlCarrito('Red Bull')">Agregar al carrito</button></li>
+            <li><b>Monster</b>: Con una amplia variedad de sabores, es la favorita de jóvenes y deportistas extremos. <button onclick="agregarAlCarrito('Monster')">Agregar al carrito</button></li>
+            <li><b>Rockstar</b>: Popular por su sabor intenso y su imagen urbana. <button onclick="agregarAlCarrito('Rockstar')">Agregar al carrito</button></li>
+            <li><b>Vive100</b>: Marca mexicana muy accesible, reconocida por su precio y su efecto revitalizante inmediato. <button onclick="agregarAlCarrito('Vive100')">Agregar al carrito</button></li>
+            <li><b>Boost</b>: Otra opción mexicana, ideal para quienes buscan energía rápida y sabor agradable. <button onclick="agregarAlCarrito('Boost')">Agregar al carrito</button></li>
+            <li><b>Volt</b>: Energética nacional, destaca por su precio y su presencia en tiendas de conveniencia. <button onclick="agregarAlCarrito('Volt')">Agregar al carrito</button></li>
+            <li><b>Burn</b>: De Coca-Cola, con sabores frutales y presencia en eventos musicales y deportivos. <button onclick="agregarAlCarrito('Burn')">Agregar al carrito</button></li>
+        </ul>
+        <div style="text-align:center;margin-top:30px;">
+            <a href="carrito.html">Ver carrito</a>
+        </div>
+        <div style="text-align:center;margin-top:30px;">
+            <a href="PAGINAPRINCIPAL.html">Volver al menú principal</a>
+        </div>
+    </div>
+    <script>
+        function agregarAlCarrito(bebida) {
+            fetch('http://localhost:3000/api/carrito', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nombre: bebida })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.mensaje) {
+                    alert('Bebida agregada al carrito: ' + bebida);
+                } else {
+                    alert(data.error || 'Error al agregar al carrito');
+                }
+            })
+            .catch(() => alert('Error de conexión con el servidor'));
+        }
+    </script>
+</body>
+</html>

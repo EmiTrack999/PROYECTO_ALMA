@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Modelo Especial - BebidasMX</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+      color: #333;
+      padding: 30px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    a {
+      color: #00a98f;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    h1 {
+      color: #00a98f;
+      font-weight: 700;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    img {
+      display: block;
+      margin: 0 auto 25px;
+      width: 250px;
+      object-fit: contain;
+    }
+    .descripcion {
+      font-size: 1.1rem;
+      line-height: 1.5;
+      color: #eee;
+      background-color: rgba(0, 169, 143, 0.15);
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+    }
+    .volver {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      font-size: 1rem;
+      color: #00a98f;
+    }
+    .cerveza-detalle {
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+    }
+    .cerveza-detalle button {
+      background-color: #00a98f;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .cerveza-detalle button:hover {
+      background-color: #008f7f;
+    }
+  </style>
+</head>
+<body>
+  <div class="cerveza-detalle">
+    <img src="IMAGENES/modelo.png" alt="Cerveza Modelo" />
+    <h1>Modelo Especial</h1>
+    <p>Modelo Especial es una cerveza clara tipo lager, reconocida por su sabor suave y equilibrado. Su proceso de elaboración tradicional le confiere un carácter refrescante y versátil, perfecta para acompañar cualquier momento social o comida.</p>
+    <button onclick="agregarAlCarrito('Modelo Especial')">Agregar al carrito</button>
+    <a href="bebidas_alcoholicas.html">Volver a bebidas alcohólicas</a>
+  </div>
+  <script>
+  function agregarAlCarrito(bebida) {
+    fetch('http://localhost:3000/api/carrito', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre: bebida })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if(data.mensaje) {
+        alert('Bebida agregada al carrito: ' + bebida);
+      } else {
+        alert(data.error || 'Error al agregar al carrito');
+      }
+    })
+    .catch(() => alert('Error de conexión con el servidor'));
+  }
+  </script>
+</body>
+</html>

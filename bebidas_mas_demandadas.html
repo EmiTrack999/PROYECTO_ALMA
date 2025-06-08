@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bebidas Más Demandadas</title>
+  <link rel="stylesheet" href="ESTILOS.css" />
+</head>
+<body>
+  <div class="main-content" style="max-width:600px;margin:40px auto;background:rgba(255,255,255,0.08);border-radius:16px;padding:32px;">
+    <h1 style="color:#00a98f;text-align:center;">Bebidas Más Demandadas del Mercado</h1>
+    <p style="margin-bottom:24px; color:#00a98f; font-weight:600;">Estas son las bebidas más consumidas y reconocidas en México y el mundo, tanto refrescos como energéticas y cervezas. Su popularidad se debe a su sabor, historia y presencia en la cultura popular.</p>
+    <ul class="lista-bebidas" style="margin:30px 0 0 0;padding:0;list-style:none;text-align:center;">
+      <li style="margin-bottom:18px;"><b>Coca-Cola</b>: El refresco más vendido del mundo, símbolo de la cultura global y presente en casi todos los hogares mexicanos. <button onclick="agregarAlCarrito('Coca-Cola')">Agregar al carrito</button></li>
+      <li style="margin-bottom:18px;"><b>Pepsi</b>: Competidor directo de Coca-Cola, famosa por su sabor dulce y campañas publicitarias icónicas. <button onclick="agregarAlCarrito('Pepsi')">Agregar al carrito</button></li>
+      <li style="margin-bottom:18px;"><b>Red Bull</b>: Líder en bebidas energéticas, conocida por su eslogan "te da alas" y su apoyo a deportes extremos. <button onclick="agregarAlCarrito('Red Bull')">Agregar al carrito</button></li>
+      <li style="margin-bottom:18px;"><b>Corona</b>: La cerveza mexicana más exportada, reconocida por su sabor ligero y su tradicional rodaja de limón. <button onclick="agregarAlCarrito('Corona')">Agregar al carrito</button></li>
+      <li style="margin-bottom:18px;"><b>Monster</b>: Bebida energética popular entre jóvenes y deportistas, con variedad de sabores y alto contenido de cafeína. <button onclick="agregarAlCarrito('Monster')">Agregar al carrito</button></li>
+      <li style="margin-bottom:18px;"><b>Bonafont</b>: Agua embotellada líder en México, símbolo de hidratación saludable. <button onclick="agregarAlCarrito('Bonafont')">Agregar al carrito</button></li>
+      <li style="margin-bottom:18px;"><b>Powerade</b>: Bebida isotónica preferida por deportistas para reponer electrolitos. <button onclick="agregarAlCarrito('Powerade')">Agregar al carrito</button></li>
+      <li style="margin-bottom:18px;"><b>Electrolit</b>: Bebida hidratante mexicana, muy popular para reponer líquidos y minerales. <button onclick="agregarAlCarrito('Electrolit')">Agregar al carrito</button></li>
+      <li style="margin-bottom:18px;"><b>Sprite</b>: Refresco de lima-limón, muy consumido en México por su sabor refrescante. <button onclick="agregarAlCarrito('Sprite')">Agregar al carrito</button></li>
+      <li style="margin-bottom:18px;"><b>Fanta</b>: Refresco de naranja, clásico en reuniones familiares y fiestas. <button onclick="agregarAlCarrito('Fanta')">Agregar al carrito</button></li>
+    </ul>
+    <div style="text-align:center;margin-top:30px;">
+      <a href="carrito.html">Ver carrito</a>
+    </div>
+    <div style="text-align:center;margin-top:30px;">
+      <a href="PAGINAPRINCIPAL.html" style="color:#00a98f;text-decoration:underline;">Volver al menú principal</a>
+    </div>
+  </div>
+  <script>
+function agregarAlCarrito(bebida) {
+  fetch('http://localhost:3000/api/carrito', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ nombre: bebida })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if(data.mensaje) {
+      alert('Bebida agregada al carrito: ' + bebida);
+    } else {
+      alert(data.error || 'Error al agregar al carrito');
+    }
+  })
+  .catch(() => alert('Error de conexión con el servidor'));
+}
+</script>
+</body>
+</html>

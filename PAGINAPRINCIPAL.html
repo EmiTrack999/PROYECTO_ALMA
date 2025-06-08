@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menú de Bebidas</title>
+  <link rel="stylesheet" href="estilos.css" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Menú lateral tipo app -->
+  <aside class="sidebar">
+    <div class="sidebar-title">BebidasMX</div>
+    <nav class="sidebar-nav">
+      <a href="INICIOSESION.html"><i class="ri-home-4-line"></i> Inicio</a>
+      <a href="bebidas_alcoholicas.html"><i class="ri-whiskey-line"></i> Alcohólicas</a>
+      <a href="bebidas_energeticas.html"><i class="ri-battery-charge-line"></i> Energéticas</a>
+      <a href="bebidas_mas_demandadas.html"><i class="ri-fire-line"></i> Populares</a>
+    </nav>
+  </aside>
+
+  <!-- Contenido principal -->
+  <main class="main-content">
+    <div class="menu-container">
+
+      <!-- LOGO CENTRADO -->
+      <div style="text-align: center; margin-bottom: 30px;">
+  <img src="IMAGENES/LOGODELAWEB.PNG" alt="Logo BebidasMX" class="logo-central" />
+</div>
+
+
+      <!-- FRASES MOTIVADORAS -->
+      <div style="margin-bottom: 30px;">
+        <h2 style="color: #00a98f; font-size: 1.5rem; margin-bottom: 10px;">"Descubre el sabor que enciende tus días."</h2>
+        <p style="font-size: 1rem; color: #555;">Cada bebida es una historia. Encuentra la tuya.</p>
+        <p style="font-size: 1rem; color: #555;">Desde lo clásico hasta lo energético. ¡Explora y disfruta!</p>
+      </div>
+
+      <!-- OPCIONES DEL MENÚ -->
+      <div class="menu-title">Elige tu tipo de bebida</div>
+      <div class="menu-options">
+        <button class="menu-btn" onclick="window.location.href='bebidas_alcoholicas.html'">
+          <i class="ri-whiskey-line"></i> Bebidas Alcohólicas
+        </button>
+        <button class="menu-btn" onclick="window.location.href='bebidasenergeticas.html'">
+          <i class="ri-battery-charge-line"></i> Bebidas Energéticas
+        </button>
+        <button class="menu-btn" onclick="window.location.href='bebidas_mas_demandadas.html'">
+          <i class="ri-fire-line"></i> Más Demandadas del Mercado
+        </button>
+      </div>
+      <div style="text-align:center; margin-top:30px;">
+        <button class="menu-btn" style="background:#00a98f;color:#fff;font-weight:700;" onclick="window.location.href='carrito.html'">
+          <i class="ri-shopping-cart-2-line"></i> Ver Carrito
+        </button>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>

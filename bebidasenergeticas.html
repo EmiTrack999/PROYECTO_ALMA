@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bebidas Energéticas - BebidasMX</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: #f0f0f0;
+      margin: 0;
+      padding: 30px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #ffce00;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 5px #000;
+    }
+    p.lead {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      color: #dcdcdc;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+    .card {
+      background-color: #0a2749;
+      border-radius: 15px;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+      width: 280px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(255, 206, 0, 0.7);
+    }
+    .card img {
+      width: 140px;
+      height: 140px;
+      object-fit: contain;
+      margin-bottom: 15px;
+      background: #112e57;
+      border-radius: 12px;
+      padding: 10px;
+    }
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-align: center;
+      color: #ffce00;
+    }
+    .card-description {
+      font-size: 1rem;
+      line-height: 1.4;
+      color: #e0d84b;
+      text-align: center;
+    }
+    a.volver {
+      display: block;
+      margin-top: 40px;
+      text-align: center;
+      font-size: 1.1rem;
+      color: #ffce00;
+      font-weight: 700;
+      text-decoration: none;
+      text-shadow: 0 0 8px #ffce00;
+      transition: color 0.3s;
+    }
+    a.volver:hover {
+      color: #fff700;
+    }
+    @media (max-width: 768px) {
+      .cards-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .card {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Bebidas Energéticas</h1>
+  <p class="lead">
+    Aunque no todos son mayores de edad, aquí tienes una selección popular de bebidas energéticas para mantenerte activo y con energía.
+  </p>
+
+  <div class="cards-container">
+    <div class="card">
+      <img src="IMAGENES/redbull.png" alt="Red Bull" />
+      <div class="card-title">Red Bull</div>
+      <div class="card-description">
+        La bebida energética más reconocida mundialmente, perfecta para aumentar la concentración y energía rápidamente.
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="IMAGENES/monster.png" alt="Monster Energy" />
+      <div class="card-title">Monster Energy</div>
+      <div class="card-description">
+        Sabor intenso y una mezcla potente de cafeína, taurina y vitaminas para mantenerte activo durante horas.
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="IMAGENES/rockstar.png" alt="Rockstar Energy" />
+      <div class="card-title">Rockstar Energy</div>
+      <div class="card-description">
+        Energía y sabor en cada lata, diseñada para quienes llevan un estilo de vida activo y buscan un impulso extra.
+      </div>
+    </div>
+  </div>
+
+  <a href="PAGINAPRINCIPAL.html" class="volver">&larr; Volver al inicio</a>
+</body>
+</html>

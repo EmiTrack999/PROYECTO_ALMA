@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bebidas Alcohólicas - BebidasMX</title>
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: row;
+    }
+
+    /* Menú lateral */
+    nav.sidebar {
+      width: 250px;
+      background-color: #064a45;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 30px 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      box-shadow: 3px 0 15px rgba(0,0,0,0.3);
+      z-index: 10000;
+    }
+
+    nav.sidebar h2 {
+      margin-bottom: 30px;
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: #00a98f;
+      text-align: center;
+      letter-spacing: 1.5px;
+    }
+
+    nav.sidebar a {
+      color: white;
+      text-decoration: none;
+      padding: 12px 15px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+
+    nav.sidebar a:hover,
+    nav.sidebar a.active {
+      background-color: #00a98f;
+      color: #fff;
+    }
+
+    /* Contenido principal */
+    main.content {
+      margin-left: 250px;
+      padding: 40px 30px;
+      flex-grow: 1;
+      max-width: calc(100% - 250px);
+      overflow-y: auto;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #00a98f;
+      text-align: center;
+      font-weight: 700;
+      font-size: 2.5rem;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    }
+
+    p.lead {
+      max-width: 600px;
+      text-align: center;
+      font-size: 1.15rem;
+      margin-bottom: 40px;
+      color: #555;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      width: 280px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 14px 28px rgba(0,0,0,0.25);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: contain;
+      background: #f9f9f9;
+      padding: 20px;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      color: #00a98f;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .card-description {
+      font-size: 1rem;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    /* Verificación y modal */
+    #verificacionEdad {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.9);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 9999;
+      padding: 20px;
+      color: white;
+    }
+
+    #verificacionEdad h2 {
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+
+    .botonEdad {
+      padding: 12px 24px;
+      margin: 10px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .botonEdad.si {
+      background-color: #16a085;
+      color: white;
+    }
+
+    .botonEdad.no {
+      background-color: #c0392b;
+      color: white;
+    }
+
+    .botonEdad:hover {
+      transform: scale(1.05);
+    }
+
+    #modalRestriccion {
+      display: none;
+      position: fixed;
+      z-index: 10000;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .modalContenido {
+      background-color: #ffffff;
+      color: #111;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+      max-width: 400px;
+      width: 90%;
+    }
+
+    .modalContenido h3 {
+      margin-bottom: 12px;
+      font-size: 1.5rem;
+      color: #c0392b;
+    }
+
+    .modalContenido p {
+      margin-bottom: 20px;
+      font-size: 1rem;
+    }
+
+    .modalContenido button {
+      padding: 10px 20px;
+      background-color: #c0392b;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .modalContenido button:hover {
+      background-color: #e74c3c;
+    }
+
+    /* Lista de bebidas */
+    .lista-bebidas {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      color: #333;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .lista-bebidas li {
+      background: rgba(255,255,255,0.8);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 10px;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .lista-bebidas li:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,1);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+      nav.sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 15px 10px;
+        box-shadow: none;
+      }
+      nav.sidebar a {
+        margin-bottom: 0;
+      }
+      main.content {
+        margin-left: 0;
+        max-width: 100%;
+        padding: 20px 10px;
+      }
+      .cards-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .card {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Verificación de edad -->
+<div id="verificacionEdad">
+  <h2>Este sitio solo permite el acceso a mayores de 18 años.</h2>
+  <p>¿Eres mayor de 18 años?</p>
+  <button class="botonEdad si" onclick="permitirAcceso()">Sí, soy mayor de 18</button>
+  <button class="botonEdad no" onclick="denegarAcceso()">No, soy menor de edad</button>
+</div>
+
+<!-- Menú lateral -->
+<nav class="sidebar">
+  <h2>BebidasMX</h2>
+  <a href="PAGINAPRINCIPAL.html" class="active">Inicio</a>
+  <a href="modelo.html">Modelo Especial</a>
+  <a href="corona.html">Corona Extra</a>
+  <a href="indio.html">Indio</a>
+  <a href="victoria.html">Victoria</a>
+  <a href="pacifico.html">Pacífico</a>
+  <a href="bohemia.html">Bohemia</a>
+  <a href="sol.html">Sol</a>
+  <a href="cartablanca.html">Carta Blanca</a>
+  <a href="leon.html">León</a>
+  <a href="dosequis.html">Dos Equis (XX)</a>
+  <a href="superior.html">Superior</a>
+  <a href="montejo.html">Montejo</a>
+  <a href="tecate.html">Tecate</a>
+  <a href="negramodelo.html">Negra Modelo</a>
+  <a href="coronalight.html">Corona Light</a>
+  <a href="michelada.html">Michelada</a>
+  <a href="tequila.html">Tequila</a>
+  <a href="mezcal.html">Mezcal</a>
+  <a href="bebidas_energeticas.html">Bebidas Energéticas</a>
+</nav>
+
+<!-- Contenido principal -->
+<main class="content" id="contenidoPagina" style="display:none;">
+  <div class="main-content">
+    <h1>Bebidas Alcohólicas Populares en México</h1>
+    <p style="margin-bottom:24px; color:#00a98f; font-weight:600;">México es reconocido mundialmente por la calidad y variedad de sus bebidas alcohólicas, especialmente sus cervezas y destilados. Aquí te presentamos las más populares y consumidas:</p>
+    <ul class="lista-bebidas">
+      <li><a href="modelo.html" style="color:#00a98f; font-weight:600;">Modelo Especial</a>: Lager clara, suave y refrescante, ideal para cualquier ocasión. <button onclick="agregarAlCarrito('Modelo Especial')">Agregar al carrito</button></li>
+      <li><a href="corona.html" style="color:#00a98f; font-weight:600;">Corona Extra</a>: La cerveza mexicana más famosa en el mundo, ligera y perfecta para acompañar con limón. <button onclick="agregarAlCarrito('Corona Extra')">Agregar al carrito</button></li>
+      <li><a href="indio.html" style="color:#00a98f; font-weight:600;">Indio</a>: Cerveza oscura con notas maltosas, preferida por quienes buscan un sabor más intenso. <button onclick="agregarAlCarrito('Indio')">Agregar al carrito</button></li>
+      <li><b>Victoria</b>: La cerveza más antigua de México, de tipo Vienna, con sabor equilibrado y color ámbar. <button onclick="agregarAlCarrito('Victoria')">Agregar al carrito</button></li>
+      <li><b>Pacífico</b>: Originaria de Mazatlán, Sinaloa, es una lager clara y refrescante, ideal para la playa. <button onclick="agregarAlCarrito('Pacífico')">Agregar al carrito</button></li>
+      <li><b>Bohemia</b>: Reconocida por su calidad premium, disponible en estilos Pilsner, Vienna y Weizen. <button onclick="agregarAlCarrito('Bohemia')">Agregar al carrito</button></li>
+      <li><b>Sol</b>: Lager clara, ligera y refrescante, muy popular en fiestas y reuniones. <button onclick="agregarAlCarrito('Sol')">Agregar al carrito</button></li>
+      <li><b>Carta Blanca</b>: Tradicional del norte de México, con sabor robusto y gran historia. <button onclick="agregarAlCarrito('Carta Blanca')">Agregar al carrito</button></li>
+      <li><b>León</b>: Cerveza oscura tipo Munich, con notas a caramelo y cuerpo medio. <button onclick="agregarAlCarrito('León')">Agregar al carrito</button></li>
+      <li><b>Dos Equis (XX)</b>: Disponible en ámbar y lager, famosa por su campaña "El hombre más interesante del mundo". <button onclick="agregarAlCarrito('Dos Equis (XX)')">Agregar al carrito</button></li>
+      <li><b>Superior</b>: Lager clara, de sabor suave y fácil de tomar. <button onclick="agregarAlCarrito('Superior')">Agregar al carrito</button></li>
+      <li><b>Montejo</b>: Originaria de Yucatán, lager clara y refrescante. <button onclick="agregarAlCarrito('Montejo')">Agregar al carrito</button></li>
+      <li><b>Tecate</b>: Muy popular en el norte, ideal para acompañar con clamato y limón. <button onclick="agregarAlCarrito('Tecate')">Agregar al carrito</button></li>
+      <li><b>Negra Modelo</b>: Oscura tipo Munich, con sabor a caramelo y cuerpo robusto. <button onclick="agregarAlCarrito('Negra Modelo')">Agregar al carrito</button></li>
+      <li><b>Corona Light</b>: Versión ligera de Corona, ideal para quienes buscan menos calorías. <button onclick="agregarAlCarrito('Corona Light')">Agregar al carrito</button></li>
+      <li><b>Michelada</b>: Bebida preparada con cerveza, jugo de limón, salsas y especias, muy popular en todo México. <button onclick="agregarAlCarrito('Michelada')">Agregar al carrito</button></li>
+      <li><b>Tequila</b>: El destilado más famoso de México, hecho a base de agave azul, ideal para shots o cocteles. <button onclick="agregarAlCarrito('Tequila')">Agregar al carrito</button></li>
+      <li><b>Mezcal</b>: Destilado artesanal de agave, con sabor ahumado y gran tradición en Oaxaca. <button onclick="agregarAlCarrito('Mezcal')">Agregar al carrito</button></li>
+      <li><b>Charanda</b>: Destilado típico de Michoacán, elaborado a partir de caña de azúcar. <button onclick="agregarAlCarrito('Charanda')">Agregar al carrito</button></li>
+    </ul>
+    <div style="text-align:center;margin-top:30px;">
+      <a href="carrito.html">Ver carrito</a>
+    </div>
+    <div style="text-align:center;margin-top:30px;">
+      <a href="PAGINAPRINCIPAL.html">Volver al menú principal</a>
+    </div>
+  </div>
+</main>
+
+<!-- Modal acceso denegado -->
+<div id="modalRestriccion">
+  <div class="modalContenido">
+    <h3>Acceso denegado</h3>
+    <p>Este contenido solo está disponible para mayores de edad.</p>
+    <button onclick="redirigir()">Ir a bebidas energéticas</button>
+  </div>
+</div>
+
+<script>
+  function permitirAcceso() {
+    document.getElementById('verificacionEdad').style.display = 'none';
+    document.getElementById('contenidoPagina').style.display = 'block';
+  }
+
+  function denegarAcceso() {
+    document.getElementById('verificacionEdad').style.display = 'none';
+    document.getElementById('modalRestriccion').style.display = 'flex';
+  }
+
+  function redirigir() {
+    window.location.href = "bebidas_energeticas.html";
+  }
+
+  function agregarAlCarrito(bebida) {
+    fetch('http://localhost:3000/api/carrito', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre: bebida })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if(data.mensaje) {
+        alert('Bebida agregada al carrito: ' + bebida);
+      } else {
+        alert(data.error || 'Error al agregar al carrito');
+      }
+    })
+    .catch(() => alert('Error de conexión con el servidor'));
+  }
+</script>
+
+</body>
+</html>
