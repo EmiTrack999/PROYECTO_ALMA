@@ -1,138 +1,216 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bebidas Energéticas - BebidasMX</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bebidas Energéticas Populares en México</title>
+  <link rel="stylesheet" href="styles.css">
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
-      color: #f0f0f0;
+      background: linear-gradient(135deg, #0f2027, #2c5364);
       margin: 0;
-      padding: 30px;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
+      padding: 0;
+      color: #333;
     }
+
+    main.content {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
     h1 {
+      color: #00a98f;
       text-align: center;
-      color: #ffce00;
-      font-weight: 700;
-      margin-bottom: 20px;
-      text-shadow: 1px 1px 5px #000;
+      margin-top: 30px;
+      font-size: 2.5rem;
     }
-    p.lead {
+
+    p {
+      margin: 20px auto 24px;
+      color: #00ffd0;
+      font-weight: 600;
       text-align: center;
-      font-size: 1.2rem;
-      margin-bottom: 40px;
-      color: #dcdcdc;
       max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
+      font-size: 1.2rem;
     }
-    .cards-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      justify-content: center;
-    }
-    .card {
-      background-color: #0a2749;
-      border-radius: 15px;
-      box-shadow: 0 8px 15px rgba(0,0,0,0.3);
-      width: 280px;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      color: #fff;
+
+    .lista-bebidas {
+      list-style-type: none;
+      padding: 0;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      padding: 20px;
+      gap: 15px;
     }
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 30px rgba(255, 206, 0, 0.7);
-    }
-    .card img {
-      width: 140px;
-      height: 140px;
-      object-fit: contain;
-      margin-bottom: 15px;
-      background: #112e57;
+
+    .lista-bebidas li {
+      background: rgba(255, 255, 255, 0.9);
+      border-left: 6px solid #00a98f;
       border-radius: 12px;
-      padding: 10px;
-    }
-    .card-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-      text-align: center;
-      color: #ffce00;
-    }
-    .card-description {
-      font-size: 1rem;
-      line-height: 1.4;
-      color: #e0d84b;
-      text-align: center;
-    }
-    a.volver {
-      display: block;
-      margin-top: 40px;
-      text-align: center;
+      padding: 18px 20px;
       font-size: 1.1rem;
-      color: #ffce00;
-      font-weight: 700;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .lista-bebidas li:hover {
+      background: #e0fdf9;
+      transform: translateY(-2px);
+    }
+
+    .lista-bebidas button {
+      background-color: #00a98f;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .lista-bebidas button:hover {
+      background-color: #00907b;
+      transform: scale(1.05);
+    }
+
+    .lista-bebidas button::before {
+      content: "🛒 ";
+    }
+
+    .links {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .links a {
+      display: inline-block;
+      margin: 0 10px;
+      color: #00ffd0;
       text-decoration: none;
-      text-shadow: 0 0 8px #ffce00;
-      transition: color 0.3s;
+      font-weight: bold;
     }
-    a.volver:hover {
-      color: #fff700;
+
+    .links a:hover {
+      text-decoration: underline;
     }
-    @media (max-width: 768px) {
-      .cards-container {
-        flex-direction: column;
-        align-items: center;
-      }
-      .card {
-        width: 90%;
-      }
+
+    /* Estilos para el modal de éxito */
+    #modal-exito {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.35);
+      z-index: 99999;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #modal-exito div {
+      background: linear-gradient(90deg, #00c6a2, #00a98f);
+      color: #fff;
+      padding: 38px 48px;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-align: center;
+      min-width: 260px;
+    }
+
+    #modal-exito button {
+      margin-top: 10px;
+      padding: 10px 28px;
+      border: none;
+      border-radius: 8px;
+      background: #fff;
+      color: #00a98f;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <h1>Bebidas Energéticas</h1>
-  <p class="lead">
-    Aunque no todos son mayores de edad, aquí tienes una selección popular de bebidas energéticas para mantenerte activo y con energía.
-  </p>
+  <main class="content">
+    <h1>Bebidas Energéticas Populares</h1>
+    <div id="bienvenida" style="display:none;text-align:center;margin-bottom:20px;font-size:1.2rem;color:#00a98f;font-weight:bold;"></div>
+    <p>
+      Las bebidas energéticas son consumidas por quienes buscan un impulso extra de energía y concentración. Son populares entre estudiantes, deportistas y personas con jornadas largas.
+    </p>
 
-  <div class="cards-container">
-    <div class="card">
-      <img src="IMAGENES/redbull.png" alt="Red Bull" />
-      <div class="card-title">Red Bull</div>
-      <div class="card-description">
-        La bebida energética más reconocida mundialmente, perfecta para aumentar la concentración y energía rápidamente.
-      </div>
+    <ul class="lista-bebidas">
+      <li><b>Red Bull</b>: Pionera en el mercado, famosa por su sabor y su eslogan "te da alas". <button onclick="agregarAlCarrito('Red Bull')">Agregar al carrito</button></li>
+      <li><b>Monster</b>: Con una amplia variedad de sabores, es la favorita de jóvenes y deportistas extremos. <button onclick="agregarAlCarrito('Monster')">Agregar al carrito</button></li>
+      <li><b>Rockstar</b>: Popular por su sabor intenso y su imagen urbana. <button onclick="agregarAlCarrito('Rockstar')">Agregar al carrito</button></li>
+      <li><b>Vive100</b>: Marca mexicana muy accesible, reconocida por su precio y su efecto revitalizante inmediato. <button onclick="agregarAlCarrito('Vive100')">Agregar al carrito</button></li>
+      <li><b>Boost</b>: Otra opción mexicana, ideal para quienes buscan energía rápida y sabor agradable. <button onclick="agregarAlCarrito('Boost')">Agregar al carrito</button></li>
+      <li><b>Volt</b>: Energética nacional, destaca por su precio y su presencia en tiendas de conveniencia. <button onclick="agregarAlCarrito('Volt')">Agregar al carrito</button></li>
+      <li><b>Burn</b>: De Coca-Cola, con sabores frutales y presencia en eventos musicales y deportivos. <button onclick="agregarAlCarrito('Burn')">Agregar al carrito</button></li>
+      <li><b>Adrenaline Rush</b>: Famosa por su efecto fuerte y rápido, muy popular en Rusia y México. <button onclick="agregarAlCarrito('Adrenaline Rush')">Agregar al carrito</button></li>
+      <li><b>XL Energy</b>: Bebida con buen equilibrio entre sabor dulce y efecto estimulante. <button onclick="agregarAlCarrito('XL Energy')">Agregar al carrito</button></li>
+      <li><b>Blue Energy</b>: Variante económica con buena distribución en tiendas locales. <button onclick="agregarAlCarrito('Blue Energy')">Agregar al carrito</button></li>
+    </ul>
+
+    <div class="links">
+      <a href="carrito.html">Ver carrito</a>
+      <a href="PAGINAPRINCIPAL.html">Volver al menú principal</a>
     </div>
 
-    <div class="card">
-      <img src="IMAGENES/monster.png" alt="Monster Energy" />
-      <div class="card-title">Monster Energy</div>
-      <div class="card-description">
-        Sabor intenso y una mezcla potente de cafeína, taurina y vitaminas para mantenerte activo durante horas.
+    <!-- Ventana modal de éxito -->
+    <div id="modal-exito" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.35);z-index:99999;align-items:center;justify-content:center;">
+      <div style="background:linear-gradient(90deg,#00c6a2,#00a98f);color:#fff;padding:38px 48px;border-radius:18px;box-shadow:0 8px 32px rgba(0,0,0,0.18);font-size:1.3rem;font-weight:bold;text-align:center;min-width:260px;">
+        <span id="modal-exito-mensaje">¡Éxito al agregar al carrito!</span>
+        <br><br>
+        <button onclick="cerrarModalExito()" style="margin-top:10px;padding:10px 28px;border:none;border-radius:8px;background:#fff;color:#00a98f;font-weight:700;font-size:1rem;cursor:pointer;">Aceptar</button>
       </div>
     </div>
+  </main>
 
-    <div class="card">
-      <img src="IMAGENES/rockstar.png" alt="Rockstar Energy" />
-      <div class="card-title">Rockstar Energy</div>
-      <div class="card-description">
-        Energía y sabor en cada lata, diseñada para quienes llevan un estilo de vida activo y buscan un impulso extra.
-      </div>
-    </div>
-  </div>
+  <script>
+    // Mostrar mensaje de bienvenida si hay usuario
+    document.addEventListener('DOMContentLoaded', function() {
+      var nombre = localStorage.getItem('usuarioNombre');
+      if(nombre) {
+        var div = document.getElementById('bienvenida');
+        div.textContent = '¡Bienvenido, ' + nombre + '!';
+        div.style.display = 'block';
+      }
+    });
 
-  <a href="PAGINAPRINCIPAL.html" class="volver">&larr; Volver al inicio</a>
+    function mostrarModalExito() {
+      document.getElementById('modal-exito-mensaje').textContent = '¡Éxito al agregar al carrito!';
+      document.getElementById('modal-exito').style.display = 'flex';
+    }
+
+    function cerrarModalExito() {
+      document.getElementById('modal-exito').style.display = 'none';
+    }
+
+    function agregarAlCarrito(bebida) {
+      fetch('http://localhost:3000/api/carrito', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre: bebida })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if(data.mensaje) {
+          mostrarModalExito();
+        } else {
+          mostrarModalExito();
+        }
+      })
+      .catch(() => mostrarModalExito());
+    }
+  </script>
 </body>
 </html>

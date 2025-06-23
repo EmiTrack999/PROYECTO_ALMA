@@ -8,8 +8,18 @@
 html, body {
   font-family: 'Segoe UI', Arial, sans-serif;
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
-  color: #fff;
+  background: linear-gradient(-45deg, #0f2027, #2c5364, #00a98f, #16a085, #c0392b, #f7971e);
+  background-size: 400% 400%;
+  animation: camaleonBg 12s ease-in-out infinite;
+  color: #222; /* Cambiado para mejor visibilidad en indio.html */
+}
+
+@keyframes camaleonBg {
+  0% {background-position: 0% 50%;}
+  25% {background-position: 50% 100%;}
+  50% {background-position: 100% 50%;}
+  75% {background-position: 50% 0%;}
+  100% {background-position: 0% 50%;}
 }
 
 /* VERIFICACIÓN DE EDAD */
@@ -358,4 +368,53 @@ html, body {
   font-style: italic;
   margin: 10px 0;
   color: #555;
+}
+
+/* BOTÓN AGREGAR AL CARRITO BONITO */
+.btn-carrito {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  font-size: 1.08rem;
+  background: linear-gradient(90deg, #00c6a2, #00a98f);
+  color: #fff !important;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(0, 198, 162, 0.18);
+  transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+  outline: none;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.25); /* Mejora la legibilidad */
+}
+.btn-carrito:hover {
+  background: linear-gradient(90deg, #00a98f, #00c6a2);
+  transform: scale(1.06);
+  box-shadow: 0 6px 18px rgba(0, 198, 162, 0.28);
+}
+.btn-carrito .icono-carrito {
+  font-size: 1.3em;
+  margin-right: 4px;
+}
+
+/* DETALLE DE CERVEZA */
+.cerveza-detalle,
+.cerveza-detalle p,
+.cerveza-detalle h1,
+.cerveza-detalle a,
+.cerveza-detalle button {
+  color: #fff !important;
+}
+.cerveza-detalle p {
+  background: rgba(0,0,0,0.35);
+  border-radius: 10px;
+  padding: 16px;
+  color: #fff !important;
+}
+.cerveza-detalle h1 {
+  color: #00ffd0 !important;
+}
+.cerveza-detalle a {
+  color: #00ffd0 !important;
 }

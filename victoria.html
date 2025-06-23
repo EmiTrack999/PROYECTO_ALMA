@@ -71,6 +71,41 @@
       color: #fff;
       text-decoration: underline;
     }
+    /* Ventana modal de éxito */
+    #modal-exito {
+      display:none;
+      position:fixed;
+      top:0;
+      left:0;
+      width:100vw;
+      height:100vh;
+      background:rgba(0,0,0,0.35);
+      z-index:99999;
+      align-items:center;
+      justify-content:center;
+    }
+    #modal-exito > div {
+      background:linear-gradient(90deg,#00c6a2,#00a98f);
+      color:#fff;
+      padding:38px 48px;
+      border-radius:18px;
+      box-shadow:0 8px 32px rgba(0,0,0,0.18);
+      font-size:1.3rem;
+      font-weight:bold;
+      text-align:center;
+      min-width:260px;
+    }
+    #modal-exito button {
+      margin-top:10px;
+      padding:10px 28px;
+      border:none;
+      border-radius:8px;
+      background:#fff;
+      color:#00a98f;
+      font-weight:700;
+      font-size:1rem;
+      cursor:pointer;
+    }
   </style>
 </head>
 <body>
@@ -81,7 +116,25 @@
     <button onclick="agregarAlCarrito('Victoria')">Agregar al carrito</button>
     <a href="bebidas_alcoholicas.html">Volver a bebidas alcohólicas</a>
   </div>
+
+  <!-- Ventana modal de éxito -->
+  <div id="modal-exito">
+    <div>
+      <span id="modal-exito-mensaje">¡Producto agregado al carrito exitosamente!</span>
+      <br><br>
+      <button onclick="cerrarModalExito()">Aceptar</button>
+    </div>
+  </div>
+
   <script>
+    function mostrarModalExito(mensaje) {
+      document.getElementById('modal-exito-mensaje').textContent = mensaje;
+      document.getElementById('modal-exito').style.display = 'flex';
+    }
+    function cerrarModalExito() {
+      document.getElementById('modal-exito').style.display = 'none';
+    }
+
     function agregarAlCarrito(bebida) {
       fetch('http://localhost:3000/api/carrito', {
         method: 'POST',
@@ -91,12 +144,12 @@
       .then(res => res.json())
       .then(data => {
         if(data.mensaje) {
-          alert('Bebida agregada al carrito: ' + bebida);
+          mostrarModalExito('¡Producto agregado al carrito exitosamente!');
         } else {
-          alert(data.error || 'Error al agregar al carrito');
+          mostrarModalExito(data.error || 'Error al agregar al carrito');
         }
       })
-      .catch(() => alert('Error de conexión con el servidor'));
+      .catch(() => mostrarModalExito('Error de conexión con el servidor'));
     }
   </script>
 </body>

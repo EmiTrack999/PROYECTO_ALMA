@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Nota de Remisión</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    .nota { border: 1px solid #000; padding: 20px; width: 400px; }
+    h2 { margin-top: 0; }
+    ul { padding-left: 20px; }
+    button { margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+  <div class="nota" id="notaRemision">
+    <h2>Nota de Remisión</h2>
+    <p><strong>Código:</strong> <span id="codigoNota"></span></p>
+    <p><strong>Fecha y hora:</strong> <span id="fechaHora"></span></p>
+    <p><strong>Cliente:</strong> <span id="nombreUsuario"></span></p>
+    <h3>Productos:</h3>
+    <ul id="listaProductos"></ul>
+  </div>
+
+  <button onclick="generarPDF()">Descargar en PDF</button>
+
+  <!-- Librería html2pdf.js desde CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <script>
+    // Datos simulados
+    const usuario = {
+      nombre: "Juan Pérez",
+    };
+
+    const productosComprados = [
+      { nombre: "Cerveza Corona", cantidad: 6 },
+      { nombre: "Ron Bacardí", cantidad: 1 },
+      { nombre: "Refresco Coca-Cola", cantidad: 2 }
+    ];
+
+    // Fecha actual
+    const fecha = new Date();
+    const fechaHora = fecha.toLocaleString("es-MX");
+
+    // Código único
+    function generarCodigoRemision() {
+      let ultimo = localStorage.getItem('ultimoCodigoRemision') || 0;
+      ultimo = parseInt(ultimo) + 1;
+      localStorage.setItem('ultimoCodigoRemision', ultimo);
+      return 'NR-' + ultimo.toString().padStart(5, '0');
+    }
+
+    // Insertar datos en HTML
+    const codigoGenerado = generarCodigoRemision();
+    document.getElementById('codigoNota').textContent = codigoGenerado;
+    document.getElementById('fechaHora').textContent = fechaHora;
+    document.getElementById('nombreUsuario').textContent = usuario.nombre;
+
+    const lista = document.getElementById('listaProductos');
+    productosComprados.forEach(prod => {
+      const li = document.createElement('li');
+      li.textContent = `${prod.cantidad} x ${prod.nombre}`;
+      lista.appendChild(li);
+    });
+
+    // Función para generar el PDF
+    function generarPDF() {
+      const elemento = document.getElementById('notaRemision');
+      const opciones = {
+        margin:       0.5,
+        filename:     `${codigoGenerado}.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+      html2pdf().set(opciones).from(elemento).save();
+    }
+  </script>
+
+</body>
+</html>

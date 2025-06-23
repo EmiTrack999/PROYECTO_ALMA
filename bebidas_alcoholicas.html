@@ -4,11 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bebidas Alcohólicas - BebidasMX</title>
-  <style>
-    /* Reset básico */
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-    }
+    <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -19,7 +16,6 @@
       flex-direction: row;
     }
 
-    /* Menú lateral */
     nav.sidebar {
       width: 250px;
       background-color: #064a45;
@@ -60,7 +56,6 @@
       color: #fff;
     }
 
-    /* Contenido principal */
     main.content {
       margin-left: 250px;
       padding: 40px 30px;
@@ -88,57 +83,52 @@
       margin-right: auto;
     }
 
-    .cards-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      justify-content: center;
-      max-width: 900px;
-      width: 100%;
+    .lista-bebidas {
+      list-style-type: none;
+      padding: 0;
       margin: 0 auto;
-    }
-
-    .card {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-      width: 280px;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 14px 28px rgba(0,0,0,0.25);
-    }
-
-    .card img {
-      width: 100%;
-      height: 180px;
-      object-fit: contain;
-      background: #f9f9f9;
-      padding: 20px;
-    }
-
-    .card-body {
-      padding: 20px;
-    }
-
-    .card-title {
-      font-size: 1.5rem;
-      color: #00a98f;
-      margin-bottom: 12px;
-      font-weight: 700;
-    }
-
-    .card-description {
+      color: #333;
       font-size: 1rem;
-      color: #666;
-      line-height: 1.4;
+      line-height: 1.6;
+      max-width: 800px;
     }
 
-    /* Verificación y modal */
+    .lista-bebidas li {
+      background: rgba(255,255,255,0.9);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .lista-bebidas li:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,1);
+    }
+
+    .lista-bebidas button {
+      margin-top: 8px;
+      background-color: #00a98f;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      font-size: 0.95rem;
+    }
+
+    .lista-bebidas button:hover {
+      background-color: #048c7b;
+      transform: scale(1.05);
+    }
+
+    .lista-bebidas button::before {
+      content: "🛒 ";
+    }
+
     #verificacionEdad {
       position: fixed;
       top: 0; left: 0;
@@ -232,57 +222,59 @@
       background-color: #e74c3c;
     }
 
-    /* Lista de bebidas */
-    .lista-bebidas {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-      color: #333;
-      font-size: 1rem;
-      line-height: 1.6;
+    /* Estilos para la ventana modal de éxito */
+    #modal-exito {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.35);
+      z-index: 99999;
+      align-items: center;
+      justify-content: center;
     }
 
-    .lista-bebidas li {
-      background: rgba(255,255,255,0.8);
+    #modal-exito > div {
+      background: linear-gradient(90deg,#00c6a2,#00a98f);
+      color: #fff;
+      padding: 38px 48px;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-align: center;
+      min-width: 260px;
+    }
+
+    #modal-exito button {
+      margin-top: 10px;
+      padding: 10px 28px;
+      border: none;
       border-radius: 8px;
-      padding: 12px 16px;
-      margin-bottom: 10px;
-      transition: transform 0.3s, background 0.3s;
+      background: #fff;
+      color: #00a98f;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
     }
 
-    .lista-bebidas li:hover {
-      transform: translateY(-4px);
-      background: rgba(255,255,255,1);
-    }
-
-    /* Responsive */
     @media (max-width: 768px) {
-      body {
-        flex-direction: column;
-      }
+      body { flex-direction: column; }
       nav.sidebar {
-        width: 100%;
-        height: auto;
+        width: 100%; height: auto;
         position: relative;
         flex-direction: row;
         justify-content: space-around;
         padding: 15px 10px;
         box-shadow: none;
       }
-      nav.sidebar a {
-        margin-bottom: 0;
-      }
+      nav.sidebar a { margin-bottom: 0; }
       main.content {
         margin-left: 0;
         max-width: 100%;
         padding: 20px 10px;
-      }
-      .cards-container {
-        flex-direction: column;
-        align-items: center;
-      }
-      .card {
-        width: 90%;
       }
     }
   </style>
@@ -366,6 +358,15 @@
   </div>
 </div>
 
+<!-- Ventana modal de éxito -->
+<div id="modal-exito" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.35);z-index:99999;align-items:center;justify-content:center;">
+  <div style="background:linear-gradient(90deg,#00c6a2,#00a98f);color:#fff;padding:38px 48px;border-radius:18px;box-shadow:0 8px 32px rgba(0,0,0,0.18);font-size:1.3rem;font-weight:bold;text-align:center;min-width:260px;">
+    <span id="modal-exito-mensaje">¡Producto agregado al carrito exitosamente!</span>
+    <br><br>
+    <button onclick="cerrarModalExito()" style="margin-top:10px;padding:10px 28px;border:none;border-radius:8px;background:#fff;color:#00a98f;font-weight:700;font-size:1rem;cursor:pointer;">Aceptar</button>
+  </div>
+</div>
+
 <script>
   function permitirAcceso() {
     document.getElementById('verificacionEdad').style.display = 'none';
@@ -381,6 +382,44 @@
     window.location.href = "bebidas_energeticas.html";
   }
 
+  function mostrarVentanaMensaje(mensaje, tipo = 'exito') {
+    let ventana = document.getElementById('ventana-mensaje');
+    if (!ventana) {
+      ventana = document.createElement('div');
+      ventana.id = 'ventana-mensaje';
+      ventana.style.position = 'fixed';
+      ventana.style.top = '30px';
+      ventana.style.right = '30px';
+      ventana.style.zIndex = '99999';
+      ventana.style.minWidth = '220px';
+      ventana.style.padding = '18px 28px';
+      ventana.style.borderRadius = '12px';
+      ventana.style.fontSize = '1.1rem';
+      ventana.style.fontWeight = 'bold';
+      ventana.style.boxShadow = '0 6px 24px rgba(0,0,0,0.18)';
+      ventana.style.transition = 'opacity 0.3s';
+      ventana.style.opacity = '0.98';
+      document.body.appendChild(ventana);
+    }
+    ventana.textContent = mensaje;
+    ventana.style.background = tipo === 'exito' ? 'linear-gradient(90deg,#00c6a2,#00a98f)' : '#c0392b';
+    ventana.style.color = '#fff';
+    ventana.style.display = 'block';
+    setTimeout(() => {
+      ventana.style.opacity = '0';
+      setTimeout(() => { ventana.style.display = 'none'; ventana.style.opacity = '0.98'; }, 600);
+    }, 1800);
+  }
+
+  function mostrarModalExito(mensaje) {
+    document.getElementById('modal-exito-mensaje').textContent = mensaje;
+    document.getElementById('modal-exito').style.display = 'flex';
+  }
+
+  function cerrarModalExito() {
+    document.getElementById('modal-exito').style.display = 'none';
+  }
+
   function agregarAlCarrito(bebida) {
     fetch('http://localhost:3000/api/carrito', {
       method: 'POST',
@@ -390,12 +429,12 @@
     .then(res => res.json())
     .then(data => {
       if(data.mensaje) {
-        alert('Bebida agregada al carrito: ' + bebida);
+        mostrarModalExito('¡Producto agregado al carrito exitosamente!');
       } else {
-        alert(data.error || 'Error al agregar al carrito');
+        mostrarModalExito(data.error || 'Error al agregar al carrito');
       }
     })
-    .catch(() => alert('Error de conexión con el servidor'));
+    .catch(() => mostrarModalExito('Error de conexión con el servidor'));
   }
 </script>
 
