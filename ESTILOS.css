@@ -418,3 +418,95 @@ html, body {
 .cerveza-detalle a {
   color: #00ffd0 !important;
 }
+
+/* ESTILOS PARA FORMULARIOS */
+.form-container {
+  max-width: 400px;
+  margin: 60px auto 0 auto;
+  padding: 40px 32px 32px 32px;
+  background: rgba(255,255,255,0.98);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
+  position: relative;
+  overflow: hidden;
+  border: 1.5px solid #e0e0e0;
+  backdrop-filter: blur(2px);
+}
+.form-container:before {
+  content: '';
+  position: absolute;
+  left: -60px;
+  top: -60px;
+  width: 120px;
+  height: 120px;
+  background: url('IMAGENES/LOGODELAWEB.PNG') no-repeat center/cover;
+  border-radius: 50%;
+  opacity: 0.10;
+  z-index: 0;
+}
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 28px;
+  color: #0078d7;
+  font-size: 2rem;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+.form-container label {
+  display: block;
+  margin-bottom: 7px;
+  color: #333;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+.form-container input[type="text"],
+.form-container input[type="password"],
+.form-container input[type="email"] {
+  width: 100%;
+  padding: 13px 14px;
+  margin-bottom: 20px;
+  border: 1.5px solid #bdbdbd;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #f7fafd;
+  transition: border 0.2s;
+  outline: none;
+}
+.form-container input:focus {
+  border: 1.5px solid #0078d7;
+  background: #fff;
+}
+.form-container button {
+  width: 100%;
+  padding: 13px;
+  background: linear-gradient(90deg, #0078d7 60%, #00a98f 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,120,215,0.08);
+  transition: background 0.2s, transform 0.15s;
+  margin-bottom: 10px;
+}
+.form-container button:hover {
+  background: linear-gradient(90deg, #005fa3 60%, #008c6e 100%);
+  transform: translateY(-2px) scale(1.03);
+}
+.register-link {
+  text-align: center;
+  margin-top: 18px;
+  color: #666;
+  font-size: 1rem;
+}
+.register-link a {
+  color: #0078d7;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 4px;
+  transition: color 0.2s;
+}
+.register-link a:hover {
+  color: #00a98f;
+}

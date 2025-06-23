@@ -14,7 +14,7 @@
             background-position: top right, center;
             background-size: 180px, cover;
         }
-        .login-container {
+        .form-container {
             background: rgba(255,255,255,0.95);
             border-radius: 18px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.18);
@@ -24,7 +24,7 @@
             position: relative;
             overflow: hidden;
         }
-        .login-container:before {
+        .form-container:before {
             content: '';
             position: absolute;
             left: -60px;
@@ -36,7 +36,7 @@
             opacity: 0.18;
             z-index: 0;
         }
-        .login-container:after {
+        .form-container:after {
             content: '';
             position: absolute;
             right: -50px;
@@ -48,7 +48,7 @@
             opacity: 0.18;
             z-index: 0;
         }
-        .login-container h2 {
+        .form-container h2 {
             text-align: center;
             color: #a86e2a;
             font-family: 'Segoe UI', cursive, sans-serif;
@@ -128,38 +128,31 @@
         <img src="https://cdn.pixabay.com/photo/2017/01/20/15/06/tequila-1996132_1280.jpg" alt="Tequila">
         <img src="https://cdn.pixabay.com/photo/2017/06/02/18/24/whiskey-2368767_1280.jpg" alt="Whisky">
     </div>
-    <div class="login-container">
+    <div class="form-container">
         <h2>Registrarse</h2>
-        <form action="#" method="post">
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required>
+        <form id="registerForm" autocomplete="on">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required autofocus>
 
-            <label for="correo">Correo electrónico:</label>
-            <input type="email" id="correo" name="correo" required>
+            <label for="correo">Correo electrónico</label>
+            <input type="email" id="correo" name="correo" placeholder="ejemplo@correo.com" required>
 
-            <label for="contrasena">Contraseña:</label>
-            <input type="password" id="contrasena" name="contrasena" required>
-
-            <label for="confirmar_contrasena">Confirmar contraseña:</label>
-            <input type="password" id="confirmar_contrasena" name="confirmar_contrasena" required>
+            <label for="contrasena">Contraseña</label>
+            <input type="password" id="contrasena" name="contrasena" placeholder="Crea una contraseña" required>
 
             <button type="submit">Registrarse</button>
         </form>
         <div class="register-link">
-            <button onclick="window.location.href='PAGINAPRINCIPAL.html'" style="background:linear-gradient(90deg,#00c6a2,#00a98f);color:#fff;border:none;border-radius:8px;padding:12px 24px;font-size:1rem;font-weight:700;cursor:pointer;">Ir a la página principal</button>
+            ¿Ya tienes una cuenta?
+            <a href="INICIOSESION.html">Inicia sesión</a>
         </div>
     </div>
     <script>
-        document.querySelector('form').addEventListener('submit', async function(e) {
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const nombre = document.getElementById('nombre').value;
             const correo = document.getElementById('correo').value;
             const contrasena = document.getElementById('contrasena').value;
-            const confirmar = document.getElementById('confirmar_contrasena').value;
-            if(contrasena !== confirmar) {
-                alert('Las contraseñas no coinciden');
-                return;
-            }
             fetch('http://localhost:3000/api/registrar', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
